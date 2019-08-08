@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>  
+  <head>  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+    <meta http-equiv="Content-Script-Type" content="text/javascript">  
+    <script type="text/javascript">  
+      var re = /^(?:[2-9]|9[1-9])[0-9]{3}\-[0-9]{4}$/;
+      var mailcom = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[com]{3})$/;
+      var mailorg = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z0-9]+)*(\.[org]{3})$/;
+      var mailbr = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[br]{2})$/;
+      var sitecom = /^[www]{3}\.[a-z0-9-]+(\.[a-z0-9-]+)*(\.[com]{3})$/;
+      var siteorg = /^[www]{3}\.[a-z0-9-]+(\.[a-z0-9-]+)*(\.[org]{3})$/;
+      var sitebr = /^[www]{3}\.[a-z0-9-]+(\.[a-z0-9-]+)*(\.[br]{2})$/;
+      var identificadores = /^[_a-z0-9]+([_a-z0-9])*$/;
+      
+      function testInfo(phoneInput){  
+        var OK = re.exec(phoneInput.value);  
+        if (!OK)  
+          window.alert(phoneInput.value + " Não é um número de telefone!");  
+        else
+          window.alert("Obrigado, o seu número de telefone é " + OK[0]);  
+      }
+
+      function testIdent(identInput){  
+        var OK = identificadores.exec(identInput.value);  
+        if (!OK)  
+          window.alert(identInput.value + " Não é um identificador!");  
+        else
+          window.alert("Obrigado, o seu identificador é " + OK[0]);  
+      }
+      
+      function print(valor, email){
+      	if(valor == '1'){
+		  window.alert("Obrigado, o seu e-mail é " + email.value); 
+          return;
+        }
+        else{
+        	window.alert(email.value + " Não é um e-mail"); 
+        }
+      }  
+      
+      function testEmail(emailInput) {
+      	// body...
+      	var email = mailcom.exec(emailInput.value);
+      	if (email)  {
+          print(1,emailInput); 
+          return;
+          
+      	}
+        
+      	var email1 = mailorg.exec(emailInput.value);
+      	if (email1)  {
+          print(1,emailInput); 
+          return;
+      	}
+        var email2 = mailbr.exec(emailInput.value);
+        if (email2)  {
+          print(1,emailInput); 
+          return;
+      	}
+        print(0, emailInput)
+      }
+
+      function printsite(valor, site){
+      	if(valor == '1'){
+		  window.alert("Obrigado, o seu site é " + site.value); 
+          return;
+        }
+        else{
+        	window.alert(site.value + " Não é um site"); 
+        }
+      }
+
+      function testSite(siteInput){
+      	var site = sitecom.exec(siteInput.value);
+      	if(site) {
+      		printsite(1, siteInput);
+      		return;
+      	}
+      	var site1 = sitebr.exec(siteInput.value);
+      	if(site1) {
+      		printsite(1, siteInput);
+      		return;
+      	}
+      	var site2 = siteorg.exec(siteInput.value);
+      	if(site2) {
+      		printsite(1, siteInput);
+      		return;
+      	}
+      	printsite(0, siteInput);
+      }
+    </script>  
+  </head>  
+  <body>  
+    <p>Informe o seu número de telefone e clique em "Check".
+        <br>O formato esperado é #####-#### ou ####-####.</p>
+    <form action="#">  
+      <input id="phone"><button onclick="testInfo(document.getElementById('phone'));">Check</button>
+    </form>
+    <p>
+    	Informe seu e-mail e clique em "Check".
+    	<br>O formato esperado é seuemail@seuprovedor.com ou seuemail@seuprovedor.com.br ou seuemail@seuprovedor.org
+    </p>  
+    <form action='#'>
+    	 <input id="email"><button onclick="testEmail(document.getElementById('email'));">Check</button>
+    </form>
+    <p>
+    	Informe o site e clique em "Check".
+    	<br>O formato esperado é www.site.com ou www.site.com.br ou www.site.br ou www.site.org
+    	<form action='#'>
+    		<input id="site"><button onclick="testSite(document.getElementById('site'));">Check</button>
+    	</form>
+    </p>
+    <p>
+    	Informe o identificador e clique em "Check".
+    	<br>Deve começar com uma letra (maiúscula ou minúscula) ou underscore (caractere '_'), seguido de zero ou mais letras, dígitos ou underscores.
+    	<form action='#'>
+    		<input id="ident"><button onclick="testIdent(document.getElementById('ident'));">Check</button>
+    	</form>
+    </p>
+  </body>  
+</html>
