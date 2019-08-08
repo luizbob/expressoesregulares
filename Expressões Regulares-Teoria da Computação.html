@@ -5,7 +5,12 @@
     <meta http-equiv="Content-Script-Type" content="text/javascript">  
     <script type="text/javascript">  
       var telefone = /^(?:[2-9]|9[1-9])[0-9]{3}\-[0-9]{4}$/;
-      var mailcom = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[com]{3})$/;
+      var mailcom = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[com]{3})$/; 
+      /*Onde [_a-z0-9-] marca o inicio da string onde a mesma deve conter qualquer valor presente dentre as opções listadas. Em seguita temos o sinal de +, onde o mesmo determina que é necessario conter um ou mais reconhecimentos. 
+      Em seguida temos () que representa um grupo de captura onde é seguido por *, que indica nenhum ou infinitos reconhecimentos.
+      O \. é o caractere "." literalmente.
+	  E no final temos (\.[com]{3}) onde demonstra um grupo de captura que precisa ser confirmado com o reconhecimento de todas as letras "com" exatamente.
+	  */
       var mailorg = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z0-9]+)*(\.[org]{3})$/;
       var mailbr = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[br]{2})$/;
       var sitecom = /^[www]{3}\.[a-z0-9-]+(\.[a-z0-9-]+)*(\.[com]{3})$/;
