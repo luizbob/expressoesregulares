@@ -18,6 +18,8 @@
       var sitebr = /^[www]{3}\.[a-z0-9-]+(\.[a-z0-9-]+)*(\.[br]{2})$/;
       var identificadores = /^[_a-z0-9]+([_a-z0-9])*$/;
       
+      //Funções do JavaScript
+      
       function testInfo(phoneInput){  
         var OK = re.exec(phoneInput.value);  
         if (!OK)  
@@ -45,7 +47,6 @@
       }  
       
       function testEmail(emailInput) {
-      	// body...
       	var email = mailcom.exec(emailInput.value);
       	if (email)  {
           print(1,emailInput); 
@@ -95,6 +96,7 @@
       	printsite(0, siteInput);
       }
     </script>  
+
   </head>  
   <body>  
     <p>Informe o seu número de telefone e clique em "Check".
